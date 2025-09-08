@@ -3,7 +3,7 @@ import pygame
 
 
 def place_ball(screen, pos_x, pos_y):
-    pygame.draw.circle(screen, (0,0,255), (pos_x, pos_y), 15, 1)
+    pygame.draw.circle(screen, (255,255,255), (pos_x, pos_y), 15, 1)
 
 def create_window(width, height):
     screen = pygame.display.set_mode((width, height))
