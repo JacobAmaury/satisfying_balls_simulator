@@ -2,16 +2,15 @@ import pygame
 
 
 
+def place_ball(screen, pos_x, pos_y):
+    pygame.draw.circle(screen, (0,0,255), (pos_x, pos_y), 15, 1)
+
 def create_window(width, height):
     screen = pygame.display.set_mode((width, height))
-    background_colour = (55,55,55)
-    screen.fill(background_colour)
-    pygame.display.set_caption('Tutorial 1')
-    pygame.display.flip()
-
-    while True:
-        pass
+    pygame.display.set_caption('balls simulation')
+    return screen
 
 
 
-create_window(1920,1080)
+
+
