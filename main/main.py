@@ -20,14 +20,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             running = False
-
-
     screen.fill(background_colour)
 
-    t += dt
 
     ball_1.actu_pos(dt, height, width)
-
     display.place_ball(screen, ball_1.pos_x, ball_1.pos_y)
     pygame.display.flip() 
     
