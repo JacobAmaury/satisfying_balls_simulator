@@ -1,18 +1,22 @@
 import pygame
 import display
 import balls_simulation
+import random as rd
 
 #init
-width = 800
-height = 600
+width = 1920
+height = 1080
+v_max_init = 60
+number_of_balls = 1000
+balls = balls_simulation.balls_init(v_max_init, width, height, number_of_balls)
+
 
 screen = display.create_window(width, height) 
 background_colour = (55,55,55)
 running = True
-ball_1 = balls_simulation.ball(100,0,30,0)
 clock = pygame.time.Clock()
 t = 0.
-fps = 60.
+fps = 60*2.
 dt = 1/(fps/10)
 
 #main loop
@@ -22,9 +26,10 @@ while running:
             running = False
     screen.fill(background_colour)
 
+    for i in range(number_of_balls):
+        balls[i].actu_pos(dt, height, width)
+        display.place_ball(screen, balls[i].pos_x, balls[i].pos_y)
 
-    ball_1.actu_pos(dt, height, width)
-    display.place_ball(screen, ball_1.pos_x, ball_1.pos_y)
     pygame.display.flip() 
     
 

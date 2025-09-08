@@ -1,4 +1,5 @@
 import pygame
+import random as rd
 
 class ball:
     def __init__(self, pos_x, pos_y, v_x, v_y):
@@ -43,3 +44,10 @@ class ball:
 
 
 
+def balls_init(v_max_init, width, height, number_balls):
+
+    balls = [] 
+    for i in range(number_balls):
+        balls.append(ball(rd.randint(0, width), rd.randint(0, height), rd.randint(0, v_max_init), rd.randint(0, v_max_init)))
+    
+    return balls
