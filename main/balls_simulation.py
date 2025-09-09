@@ -51,3 +51,19 @@ def balls_init(v_max_init, width, height, number_balls):
         balls.append(ball(rd.randint(0, width), rd.randint(0, height), rd.randint(0, v_max_init), rd.randint(0, v_max_init)))
     
     return balls
+
+
+def reflexion_vector(vx, vy, normal_x, normal_y):
+    #normalisation of the normals
+    normal_narmalized = (normal_x**2+normal_y**2)**(1/2)
+    normalized_normal_x = normal_x/normal_narmalized
+    normalized_normal_y = normal_y/normal_narmalized
+    
+    #dot product
+    dot = vx * normalized_normal_x + vy * normalized_normal_y
+    
+    reflect_vector_x = vx - 2*dot * normalized_normal_x
+    reflect_vector_y = vx - 2*dot * normalized_normal_y
+    
+    
+    return reflect_vector_x, reflect_vector_y

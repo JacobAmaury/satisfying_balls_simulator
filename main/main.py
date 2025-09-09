@@ -7,7 +7,7 @@ import random as rd
 width = 1920
 height = 1080
 v_max_init = 60
-number_of_balls = 1000
+number_of_balls = 100
 balls = balls_simulation.balls_init(v_max_init, width, height, number_of_balls)
 
 
