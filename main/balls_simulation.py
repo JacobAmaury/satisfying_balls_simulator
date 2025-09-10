@@ -67,3 +67,13 @@ def reflection_vector(vx, vy, normal_x, normal_y):
     reflect_vector_y = vy - 2 * dot * normalized_normal_y
     
     return reflect_vector_x, reflect_vector_y
+
+
+def get_normal(x_start, x_end, y_start, y_end):
+    dx = x_end - x_start
+    dy = y_end - y_start
+    normal_1 = (-dy, dx)
+    normal_2 = (dy, dx)
+    return normal_1, normal_2
+    
+    
