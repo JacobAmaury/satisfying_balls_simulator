@@ -39,6 +39,22 @@ class ball:
             self.v_x = self.v_x * change_sign
             self.pos_x = 0
             self.v_x = self.v_x * alpha
+            
+        
+        if self.pos_y > self.pos_x:  
+            
+            normal = (-1, 1)
+            self.v_x, self.v_y = reflection_vector(self.v_x, self.v_y, *normal)
+
+            d = (self.pos_x + self.pos_y) / 2  # projection sur y=x
+            self.pos_x = d
+            self.pos_y = d
+
+            self.v_x *= alpha
+            self.v_y *= alpha
+
+            
+        
 
 
 
