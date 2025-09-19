@@ -6,10 +6,11 @@ import random as rd
 #init
 width = 1920
 height = 1080
-v_max_init = 60
+v_max_init = 60*3
 number_of_balls = 100
-walls = [[0, 800, 0, 2000, "up"], [1500, 2200, 0, 2000, "down"]]
-wall_1 = [0, 800, 0, 2000, "up"] 
+
+walls = [[0, 800, 0, 2000, "up"], [1500, 2200, 0, 2000, "down"], [0, 1920, 400, 450, "down"], [0, 1920, 940, 900, "up"]]
+
 
 
 
