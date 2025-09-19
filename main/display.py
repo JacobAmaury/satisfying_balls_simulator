@@ -10,7 +10,8 @@ def create_window(width, height):
     pygame.display.set_caption('balls simulation')
     return screen
 
-
+def draw_line(screen, rgb_code ,wall_coord):
+    pygame.draw.line(screen, (255, 255, 255), (wall_coord[0], wall_coord[2]), (wall_coord[1], wall_coord[3]), 3)
 
 
 

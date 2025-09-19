@@ -8,7 +8,8 @@ width = 1920
 height = 1080
 v_max_init = 60
 number_of_balls = 100
-wall_1 = [0, 800, 0, 2000]
+wall_1 = [0, 800, 0, 2000] 
+
 
 balls = balls_simulation.balls_init(v_max_init, width, height, number_of_balls)
 
@@ -27,11 +28,10 @@ while running:
         if event.type == pygame.QUIT: 
             running = False
     screen.fill(background_colour)
+    display.draw_line(screen, (255, 255, 255), wall_1)
 
-    pygame.draw.line(screen, (255, 255, 255), wall_1_start, wall_1_end, 3)
-    
     for i in range(number_of_balls):
-        balls[i].actu_pos(dt, height, width)
+        balls[i].actu_pos(dt, height, width, wall_1)
         display.place_ball(screen, balls[i].pos_x, balls[i].pos_y)
 
     pygame.display.flip() 

@@ -44,16 +44,14 @@ class ball:
         a,b = get_affine_coef(wall_coord)
         norm_1, norm_2 = get_normal(wall_coord)
 
-        if(self.pos_y<(self.pos_x*a+b)):
+        
+        if(self.pos_y>(self.pos_x*a+b)):
             reflect_vector_x, reflect_vector_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
             self.v_x = reflect_vector_x
             self.v_y = reflect_vector_y
 
 
             
-        
-
-
 
 
 
@@ -61,7 +59,7 @@ def balls_init(v_max_init, width, height, number_balls):
 
     balls = [] 
     for i in range(number_balls):
-        balls.append(ball(rd.randint(0, width), rd.randint(0, height), rd.randint(0, v_max_init), rd.randint(0, v_max_init)))
+        balls.append(ball(width/2, height/2, rd.randint(-v_max_init, v_max_init), rd.randint(-v_max_init, v_max_init)))
     
     return balls
 
