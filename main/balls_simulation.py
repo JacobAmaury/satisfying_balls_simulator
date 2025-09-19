@@ -9,7 +9,7 @@ class ball:
         self.v_y = v_y
 
 
-    def actu_pos(self, dt, height, width):
+    def actu_pos(self, dt, height, width, wall_coord):
         #init
         g = 9.81
         alpha = 0.9
@@ -41,17 +41,14 @@ class ball:
             self.v_x = self.v_x * alpha
             
         
-        if self.pos_y > self.pos_x:  
-            
-            normal = (-1, 1)
-            self.v_x, self.v_y = reflection_vector(self.v_x, self.v_y, *normal)
+        a,b = get_affine_coef(wall_coord)
+        norm_1, norm_2 = get_normal(wall_coord)
 
-            d = (self.pos_x + self.pos_y) / 2  # projection sur y=x
-            self.pos_x = d
-            self.pos_y = d
+        if(self.pos_y<(self.pos_x*a+b)):
+            reflect_vector_x, reflect_vector_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
+            self.v_x = reflect_vector_x
+            self.v_y = reflect_vector_y
 
-            self.v_x *= alpha
-            self.v_y *= alpha
 
             
         
@@ -74,10 +71,8 @@ def reflection_vector(vx, vy, normal_x, normal_y):
     normal_length = (normal_x**2 + normal_y**2) ** 0.5
     normalized_normal_x = normal_x / normal_length
     normalized_normal_y = normal_y / normal_length
-    
     # dot product
     dot = vx * normalized_normal_x + vy * normalized_normal_y
-    
     # reflection formula
     reflect_vector_x = vx - 2 * dot * normalized_normal_x
     reflect_vector_y = vy - 2 * dot * normalized_normal_y
@@ -85,11 +80,24 @@ def reflection_vector(vx, vy, normal_x, normal_y):
     return reflect_vector_x, reflect_vector_y
 
 
-def get_normal(x_start, x_end, y_start, y_end):
-    dx = x_end - x_start
-    dy = y_end - y_start
+
+def get_normal(wall_coord):
+    x1 = wall_coord[0]
+    x2 = wall_coord[1]
+    y1 = wall_coord[2]
+    y2 = wall_coord[3]
+    dx = x2 - x1
+    dy = y2 - y1
     normal_1 = (-dy, dx)
     normal_2 = (dy, -dx)
     return normal_1, normal_2
     
     
+def get_affine_coef(wall_coord):
+    x1 = wall_coord[0]
+    x2 = wall_coord[1]
+    y1 = wall_coord[2]
+    y2 = wall_coord[3]
+    a = (y2-y1)/(x2-x1)
+    b = y1-a*x1
+    return a, b

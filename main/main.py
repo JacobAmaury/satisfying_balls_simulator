@@ -8,8 +8,7 @@ width = 1920
 height = 1080
 v_max_init = 60
 number_of_balls = 100
-wall_1_start = (0, 0)
-wall_1_end = (2000, 2000)
+wall_1 = [0, 800, 0, 2000]
 
 balls = balls_simulation.balls_init(v_max_init, width, height, number_of_balls)
 
