@@ -45,17 +45,21 @@ class ball:
             a,b = get_affine_coef(wall_coord[i])
             norm_1, norm_2 = get_normal(wall_coord[i])
 
-            if(wall_coord[i][4] == "up"):
-                if(self.pos_y>=(self.pos_x*a+b)):
-                    reflect_vector_x, reflect_vector_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
-                    self.v_x = reflect_vector_x * alpha
-                    self.v_y = reflect_vector_y * alpha
+            if (wall_coord[i][4] == "up" and self.pos_y >= self.pos_x * a + b):
+                # correction de position
+                self.pos_y = self.pos_x * a + b - 0.1  # petit epsilon pour la remettre juste du bon côté
+                # réflexion
+                self.v_x, self.v_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
+                self.v_x *= alpha
+                self.v_y *= alpha
             elif(wall_coord[i][4] == "down"):
 
                 if(self.pos_y<=(self.pos_x*a+b)):
+                    self.pos_y = self.pos_x * a + b - 0.1 
                     reflect_vector_x, reflect_vector_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
                     self.v_x = reflect_vector_x * alpha
                     self.v_y = reflect_vector_y * alpha
+            
 
 
             
