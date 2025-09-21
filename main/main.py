@@ -7,9 +7,10 @@ import random as rd
 width = 1920
 height = 1080
 v_max_init = 60*3
-number_of_balls = 100
+number_of_balls = 10
 
 walls = [[0, 800, 0, 2000, "up"], [1500, 2200, 0, 2000, "down"], [0, 1920, 400, 450, "down"], [0, 1920, 940, 900, "up"]]
+walls_simu = balls_simulation.walls_for_simu(walls)
 
 
 
@@ -34,7 +35,7 @@ while running:
     display.draw_line(screen, (255, 255, 255), walls)
 
     for i in range(number_of_balls):
-        balls[i].actu_pos(dt, height, width, walls)
+        balls[i].actu_pos(dt, height, width, walls_simu)
         display.place_ball(screen, balls[i].pos_x, balls[i].pos_y)
 
     pygame.display.flip() 

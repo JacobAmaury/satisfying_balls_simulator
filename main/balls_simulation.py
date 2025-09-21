@@ -12,7 +12,7 @@ class ball:
     def actu_pos(self, dt, height, width, wall_coord):
         #init
         g = 9.81
-        alpha = 0.9
+        alpha = 0.8
         smallest_v = 0.1 
         change_sign = -1.0
 
@@ -42,23 +42,21 @@ class ball:
             
 
         for i in range(len(wall_coord)):
+
             a,b = get_affine_coef(wall_coord[i])
             norm_1, norm_2 = get_normal(wall_coord[i])
 
             if (wall_coord[i][4] == "up" and self.pos_y >= self.pos_x * a + b):
                 # correction de position
-                self.pos_y = self.pos_x * a + b - 0.1  # petit epsilon pour la remettre juste du bon côté
-                # réflexion
+                self.pos_y = self.pos_x * a + b - 0.1                
                 self.v_x, self.v_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
                 self.v_x *= alpha
                 self.v_y *= alpha
-            elif(wall_coord[i][4] == "down"):
-
-                if(self.pos_y<=(self.pos_x*a+b)):
-                    self.pos_y = self.pos_x * a + b - 0.1 
-                    reflect_vector_x, reflect_vector_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
-                    self.v_x = reflect_vector_x * alpha
-                    self.v_y = reflect_vector_y * alpha
+            elif(wall_coord[i][4] == "down" and self.pos_y<=(self.pos_x*a+b)):
+                self.pos_y = self.pos_x * a + b - 0.1 
+                reflect_vector_x, reflect_vector_y = reflection_vector(self.v_x, self.v_y, norm_1[0], norm_1[1])
+                self.v_x = reflect_vector_x * alpha
+                self.v_y = reflect_vector_y * alpha
             
 
 
@@ -110,3 +108,18 @@ def get_affine_coef(wall_coord):
     a = (y2-y1)/(x2-x1)
     b = y1-a*x1
     return a, b
+
+
+
+def walls_for_simu(walls):
+    walls_simu = []
+    for wall in walls:
+        new_wall = []
+        for j in range(4):
+            if wall[4] == "up":
+                new_wall.append(wall[j] - 15)
+            else:
+                new_wall.append(wall[j] + 15)
+        new_wall.append(wall[4]) 
+        walls_simu.append(new_wall)
+    return walls_simu
